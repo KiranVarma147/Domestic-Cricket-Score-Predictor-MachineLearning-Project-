@@ -57,19 +57,19 @@ def predict():
         temp_array += TEAMS[bowling_team]['value']
 
         overs = float(request.form['overs'])
-        runs = int(request.form['runs'])
+        score = int(request.form['score'])
         wickets = int(request.form['wickets'])
-        runs_in_prev_5_overs = int(request.form['runs_in_prev_5_overs'])
-        wickets_in_prev_5_overs = int(request.form['wickets_in_prev_5_overs'])
+        score_before_5_overs = int(request.form['score_before_5_overs'])
+        wickets_down_before_5_overs = int(request.form['wickets_down_before_5_overs'])
 
-        temp_array += [overs, runs, wickets, runs_in_prev_5_overs, wickets_in_prev_5_overs]
+        temp_array += [overs, score, wickets, score - score_before_5_overs, wickets - wickets_down_before_5_overs]
         data = np.array([temp_array])
         regressor = load('data/model.joblib')
         my_prediction = int(regressor.predict(data)[0])
 
         context = {
-            'lower_limit': my_prediction - 5,
-            'upper_limit': my_prediction + 10
+            'lower_limit': my_prediction - 10,
+            'upper_limit': my_prediction + 5
         }
 
         return render_template('result.html', **context)

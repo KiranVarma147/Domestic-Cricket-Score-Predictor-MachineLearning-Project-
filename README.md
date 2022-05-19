@@ -23,6 +23,6 @@ python create_model.py
 ### Run Flask App
 
 ```bash
-$env:FLASK_ENV="development"
+$env:FLASK_ENV="development" #for debug mode on
 flask run
 ```

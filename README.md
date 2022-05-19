@@ -24,7 +24,5 @@ python create_model.py
 
 ```bash
 $env:FLASK_ENV="development"
-```
-```bash
 flask run
 ```
